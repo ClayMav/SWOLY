@@ -31,6 +31,9 @@
               android:scheme="com.swoly" />
         </intent-filter>
       </activity>
+      <meta-data
+       android:name="com.google.android.geo.API_KEY"
+       android:value="AIzaSyDoTSeqUg8vFZ9xe1hofqu8gZ2tRoPm39k"/>
     </application>
 
 </manifest>
