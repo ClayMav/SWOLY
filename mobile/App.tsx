@@ -6,18 +6,37 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator } from "react-navigation-stack";
 
 import { HomeScreen } from "./screens/HomeScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 import { WorkoutsScreen } from "./screens/WorkoutsScreen";
 
 import { Map } from "./components/Map";
+import { WorkoutDetails } from "./components/WorkoutDetails";
+
+const WorkoutsStack = createStackNavigator({
+  List: {
+    screen: WorkoutsScreen,
+    path: "workouts",
+    navigationOptions: ({ navigation }) => ({
+      title: "Workouts"
+    })
+  },
+  WorkoutDetails: {
+    screen: WorkoutDetails,
+    path: "workoutDetails",
+    navigationOptions: ({ navigation }) => ({
+      title: `Workout Details`
+    })
+  }
+});
 
 const bottomTabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Settings: SettingsScreen,
-    Workouts: WorkoutsScreen
+    Workouts: WorkoutsStack,
+    Settings: SettingsScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

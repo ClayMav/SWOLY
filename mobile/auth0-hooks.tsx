@@ -48,6 +48,7 @@ export const useAuth0: any = () => {
             const jwtToken: string = token;
             const decoded: any = jwtDecode(jwtToken);
             setUser(decoded);
+            setIsAuthenticated(true);
           }
         } catch {
           setUser(undefined);
@@ -116,7 +117,9 @@ export const useAuth0: any = () => {
   };
 
   const logout = async () => {
-    // please get out
+    await AsyncStorage.setItem("@SWOLY:token", "");
+    setIsAuthenticated(false);
+    setUser(undefined);
   };
 
   return {
@@ -124,6 +127,7 @@ export const useAuth0: any = () => {
     isAuthenticated,
     loading,
     loginWithRedirect,
-    user
+    user,
+    logout
   };
 };
