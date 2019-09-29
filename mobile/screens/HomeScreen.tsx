@@ -6,7 +6,6 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Hometime</Text>
-      <Map />
     </View>
   );
 };

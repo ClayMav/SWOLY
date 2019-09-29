@@ -7,7 +7,7 @@ const ListItem: AnyStyledComponent = styled(View)`
   background: red;
 `;
 
-const WorkoutDetails: (props: any) => JSX.Element = (
+const WorkoutDetailsScreen: (props: any) => JSX.Element = (
   props: any
 ): JSX.Element => {
   const { data }: any = props.navigation.state.params;
@@ -40,4 +40,4 @@ const WorkoutDetails: (props: any) => JSX.Element = (
   );
 };
 
-export { WorkoutDetails };
+export { WorkoutDetailsScreen };

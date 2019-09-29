@@ -1,17 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { Container, Header, Content } from "native-base";
 
 import { useAuth0 } from "../auth0-hooks";
 
-const SettingsScreen = () => {
+const SettingsScreen = props => {
   const { logout } = useAuth0();
 
-  const onLogout = () => logout();
+  const onLogout = () => {
+    logout();
+    props.navigation.navigate(`Auth`);
+  };
   return (
-    <View style={styles.container}>
-      <Text>SET ME UP</Text>
-      <Button title="Log out" onPress={onLogout} />
-    </View>
+    <Container>
+      <Header />
+      <Content>
+        <Button title="Log out" onPress={onLogout} />
+      </Content>
+    </Container>
   );
 };
 
