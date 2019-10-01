@@ -1,10 +1,32 @@
 import React from "react";
-import { Container, Header, Content, Text } from "native-base";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  FlatList,
+  SafeAreaView,
+  Text,
+  TouchableOpacity
+} from "react-native";
 import styled, { AnyStyledComponent } from "styled-components";
 
 const ListItem: AnyStyledComponent = styled(View)`
-  background: red;
+  height: 80px;
+  padding: 30px;
+`;
+
+const WorkoutInfo = styled(View)`
+  padding: 30px;
+`;
+const WorkoutTitle = styled(Text)`
+  font-size: 26px;
+  font-weight: bold;
+`;
+const WorkoutAdditionalInfo = styled(Text)`
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
+const WorkoutDescription = styled(Text)`
+  font-size: 18px;
 `;
 
 const WorkoutDetailsScreen: (props: any) => JSX.Element = (
@@ -26,17 +48,21 @@ const WorkoutDetailsScreen: (props: any) => JSX.Element = (
     );
   };
   return (
-    <Container>
-      <Content>
-        <Text>{data.name}</Text>
-        <Text>{data.timeStart.toString()}</Text>
-        <FlatList
-          data={data.workoutExercises}
-          renderItem={renderRow}
-          keyExtractor={item => item.exercise.name}
-        />
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <WorkoutInfo>
+        <WorkoutTitle>{data.name}</WorkoutTitle>
+        <WorkoutAdditionalInfo>{`Made by ${
+          data.creator.name
+        } on ${data.timeStart.toString()}`}</WorkoutAdditionalInfo>
+        <WorkoutDescription>{data.description + "\n"}</WorkoutDescription>
+        <Text>Exercises:</Text>
+      </WorkoutInfo>
+      <FlatList
+        data={data.workoutExercises}
+        renderItem={renderRow}
+        keyExtractor={item => item.exercise.name}
+      />
+    </SafeAreaView>
   );
 };
 

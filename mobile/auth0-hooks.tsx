@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useGlobal } from "reactn";
 import { AuthSession } from "expo";
 import { AsyncStorage } from "react-native";
 import jwtDecode from "jwt-decode";
@@ -30,7 +30,7 @@ const toQueryString: (x: IParams) => string = (params: IParams): string => {
 
 export const useAuth0: any = () => {
   const [isAuthenticated, setIsAuthenticated]: any = useState(false);
-  const [user, setUser]: any = useState();
+  const [user, setUser]: any = useGlobal("user");
   const [auth0Client, setAuth0]: any = useState<undefined>();
   const [loading, setLoading]: any = useState(true);
   const [popupOpen, setPopupOpen]: any = useState(false);

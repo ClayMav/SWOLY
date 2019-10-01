@@ -1,21 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
+import React, { useEffect, useGlobal } from "reactn";
+import styled from "styled-components";
 
-import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import * as Location from "expo-location";
+
+import {
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+  ActivityIndicator
+} from "react-native";
 
 const GET_GYMS = gql`
   {
     gyms {
+      id
       name
+      address
       location {
         latitude
         longitude
       }
     }
   }
+`;
+
+const TitleBox = styled(View)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30%;
+  width: 100%;
+`;
+const Title = styled(Text)`
+  font-size: 36px;
+  font-weight: bold;
+`;
+
+const InfoBox = styled(View)`
+  padding: 30px;
+`;
+const Info = styled(Text)`
+  font-size: 16px;
+`;
+
+const GymButton = styled(TouchableOpacity)`
+  border-top-width: 1px;
+  border-top-color: lightgray;
+  height: 80px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+const GymName = styled(Text)`
+  font-weight: bold;
+  font-size: 15px;
+`;
+const GymInfo = styled(Text)`
+  font-size: 14px;
 `;
 
 const DATA = [
@@ -25,42 +72,12 @@ const DATA = [
     location: { latitude: 37.951124, longitude: -91.778133 },
     name: "Missouri S&T Gym",
     smart: 100
-  },
-  {
-    description: "705 W 10th St, Rolla, MO 65409",
-    id: "sdjagdglhadflkdjf",
-    location: { latitude: 2, longitude: 3 },
-    name: "Planet Fitness",
-    smart: 65
-  },
-  {
-    id: "askdfjasopgjajdfkalsjdfkl",
-    name: "Gold's Gym",
-    location: { latitude: 2, longitude: 3 },
-    description: "705 W 10th St, Rolla, MO 65409",
-    smart: 100
-  },
-  {
-    id: "afklsdjflajsldfjkl",
-    name: "Jim's Crossfit",
-    location: { latitude: 2, longitude: 3 },
-    description: "705 W 10th St, Rolla, MO 65409",
-    smart: 43
-  },
-  {
-    id: "asdjfkasdg",
-    name: "Bob's",
-    location: { latitude: 2, longitude: 3 },
-    description: "705 W 10th St, Rolla, MO 65409",
-    smart: 92
   }
 ];
 
 const StartScreen = props => {
   const { loading, error, data } = useQuery(GET_GYMS);
-  const [location, setLocation] = useState<Location.LocationData | undefined>(
-    undefined
-  );
+  const [location, setLocation] = useGlobal("location");
 
   useEffect(() => {
     const getLocation = async () => {
@@ -76,44 +93,52 @@ const StartScreen = props => {
     getLocation();
   }, []);
 
-  if (loading) {
-    return <Text>"Testing"</Text>;
+  if (loading || location === undefined) {
+    return (
+      <SafeAreaView>
+        <ActivityIndicator />
+      </SafeAreaView>
+    );
   } else if (error) {
-    return <Text>{error.toString()}</Text>;
+    return (
+      <SafeAreaView>
+        <Text>{error.toString()}</Text>
+      </SafeAreaView>
+    );
   }
-  console.log(data);
 
-  const renderRow: any = ({ item, index }: any) => {
+  const renderRow: any = ({ item, index }: any): JSX.Element => {
     const navTime = () => {
       props.navigation.navigate(`Map`, {
         data: data.gyms[index]
       });
     };
     return (
-      <TouchableOpacity onPress={navTime}>
-        <Text>
-          {item.name} - {item.smart}
-        </Text>
-        <Text>1.2 miles away - Open Now - 24h</Text>
-      </TouchableOpacity>
+      <GymButton onPress={navTime}>
+        <GymName>{item.name}</GymName>
+        <GymInfo>1.2 miles away - Open Now - 24h</GymInfo>
+      </GymButton>
     );
   };
 
   return (
-    <View>
-      <Text>SWOLY</Text>
-      <Text>Image Here</Text>
-      <Text>
-        star SWOLY is your personal fitness assitant, workouts are for working
-        out, let us do the mental gymnastics for you
-        {JSON.stringify(location)}
-      </Text>
-      {data && data.gyms && location ? (
-        <FlatList data={data.gyms} renderItem={renderRow} />
-      ) : (
-        <Text>Loading</Text>
-      )}
-    </View>
+    <SafeAreaView>
+      <TitleBox>
+        <Title>SWOLY</Title>
+      </TitleBox>
+      <InfoBox>
+        <Info>
+          SWOLY is your personal fitness assitant, workouts are for working out,
+          let us do the mental gymnastics for you.{"\n\n"}
+          Choose a GYM to get started:
+        </Info>
+      </InfoBox>
+      <FlatList
+        data={data.gyms}
+        renderItem={renderRow}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
   );
 };
 

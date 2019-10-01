@@ -10,16 +10,32 @@ const data = [
     timeEnd: undefined,
     currentExercise: 0,
     gym: undefined,
-    name: "Test",
-    description: "Testing stuff",
+    name: "Power Legs",
+    description: "Exhaust your legs with some casual lifting and cardio",
     target: "normies",
     workoutExercises: [
       {
         exercise: {
-          name: "Bench Press"
+          name: "Back Squats"
         },
         reps: 5,
         sets: 5,
+        isTimed: false
+      },
+      {
+        exercise: {
+          name: "Leg Press"
+        },
+        reps: 10,
+        sets: 3,
+        isTimed: false
+      },
+      {
+        exercise: {
+          name: "Weighted Lunges"
+        },
+        reps: 10,
+        sets: 3,
         isTimed: false
       }
     ],
@@ -31,7 +47,10 @@ const data = [
 ];
 
 const ListItem: AnyStyledComponent = styled(TouchableOpacity)`
-  background: black;
+  height: 80px;
+  padding: 30px;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
@@ -55,7 +74,6 @@ const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
   };
   return (
     <Container>
-      <Header />
       <Content>
         <FlatList
           data={data}

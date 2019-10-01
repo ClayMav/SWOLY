@@ -10,9 +10,10 @@ const delta: any = {
 
 const Map = props => {
   const {
+    address,
     name,
     location: { latitude, longitude }
-  } = props.marker;
+  }: any = props.marker;
 
   return (
     <MapView
@@ -22,7 +23,7 @@ const Map = props => {
       <Marker
         coordinate={{ latitude, longitude }}
         title={name}
-        description={"Nope"}
+        description={address}
       />
     </MapView>
   );

@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import { Container, Header, Content } from "native-base";
+import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 
 import { useAuth0 } from "../auth0-hooks";
 
@@ -11,20 +10,12 @@ const SettingsScreen = props => {
     logout();
     props.navigation.navigate(`Auth`);
   };
+
   return (
-    <Container>
-      <Header />
-      <Content>
-        <Button title="Log out" onPress={onLogout} />
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Button title="Log out" onPress={onLogout} />
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 30
-  }
-});
 
 export { SettingsScreen };
