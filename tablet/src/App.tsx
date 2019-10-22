@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Unoccupied from './components/screens/Unoccupied';
+import Occupied from './components/screens/Occupied';
 
 //const App: React.FC = () => {
 //  return (
@@ -45,6 +47,12 @@ export default function App() {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/unoccupied">Unoccupied</Link>
+            </li>
+            <li>
+              <Link to="/occupied">Occupied</Link>
+            </li>
           </ul>
         </nav>
 
@@ -57,6 +65,8 @@ export default function App() {
           <Route path="/users">
             <Users />
           </Route>
+          <Route path="/unoccupied" component={ Unoccupied } />
+          <Route path="/occupied" component={ Occupied } />
           <Route path="/">
             <Home />
           </Route>
