@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useGlobal } from "reactn";
+import { useState, useEffect, useGlobal } from "reactn";
 import { AuthSession } from "expo";
 import { AsyncStorage } from "react-native";
 import jwtDecode from "jwt-decode";
@@ -17,27 +17,25 @@ interface IParams {
  * Converts an object to a query string.
  */
 const toQueryString: (x: IParams) => string = (params: IParams): string => {
-  return (
-    "?" +
-    Object.entries(params)
-      .map(
-        ([key, value]: any) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-      )
-      .join("&")
-  );
+  return `?${Object.entries(params)
+    .map(
+      ([key, value]: any) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    )
+    .join("&")}`;
 };
 
 export const useAuth0: any = () => {
   const [isAuthenticated, setIsAuthenticated]: any = useState(false);
   const [user, setUser]: any = useGlobal("user");
-  const [auth0Client, setAuth0]: any = useState<undefined>();
+  //const [auth0Client, setAuth0]: any = useState<undefined>();
+  //const [, setAuth0]: any = useState<undefined>();
   const [loading, setLoading]: any = useState(true);
-  const [popupOpen, setPopupOpen]: any = useState(false);
+  //const [popupOpen, setPopupOpen]: any = useState(false);
 
   useEffect(() => {
     const initAuth0 = async () => {
-      setAuth0(undefined);
+      //setAuth0(undefined);
 
       setIsAuthenticated(undefined);
 
@@ -97,8 +95,7 @@ export const useAuth0: any = () => {
     }
   };
 
-  const handleRedirectCallback = async () => {
-    /*
+  /*const handleRedirectCallback = async () => {
     setLoading(true);
     const result = await auth0Client!.handleRedirectCallback();
     const user = await auth0Client!.getUser();
@@ -107,9 +104,9 @@ export const useAuth0: any = () => {
     setUser(user);
 
     return result;
-     */
     return undefined;
   };
+  */
 
   const getTokenSilently = async () => {
     // TODO Change to actually find and get new token from auth0

@@ -1,19 +1,24 @@
 import { createStackNavigator } from "react-navigation-stack";
 
-import { MapScreen } from "../screens/MapScreen";
-import { StartScreen } from "../screens/StartScreen";
+import { Tutorial0 } from "../screens/Tutorial/Tutorial0";
+import { Tutorial1 } from "../screens/Tutorial/Tutorial1";
 
 const GymStackNavigator = createStackNavigator(
   {
-    Start: {
-      screen: StartScreen,
+    Tutorial0: {
+      screen: Tutorial0,
       navigationOptions: {
         header: null
       }
     },
-    Map: MapScreen
+    Tutorial1: {
+      screen: Tutorial1,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
-  { initialRouteName: "Start", headerMode: "screen" }
+  { initialRouteName: "Tutorial0", headerMode: "screen" }
 );
 
 export { GymStackNavigator };

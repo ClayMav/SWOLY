@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-  TouchableOpacity
-} from "react-native";
-import { Map } from "../components/Map";
+import { Text, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
 
-DATA = [
+const DATA = [
   {
     id: "sdasdgadskfnkasdf",
     name: "Missouri S&T Gym",
@@ -42,13 +34,13 @@ DATA = [
   }
 ];
 
-const AuthScreen = props => {
+const AuthScreen: React.SFC<any> = (props: any): JSX.Element => {
   const renderRow: any = ({ item }: any) => {
     const navTime = () => {
       props.navigation.navigate("Map");
     };
     return (
-      <TouchableOpacity onClick={navTime}>
+      <TouchableOpacity onPress={navTime}>
         <Text>
           {item.name} - {item.smart}
         </Text>
@@ -68,19 +60,10 @@ const AuthScreen = props => {
       <FlatList
         data={DATA}
         renderItem={renderRow}
-        keyExtractor={item => item.id}
+        keyExtractor={(item: any): string => item.id}
       />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 80,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 export { AuthScreen };

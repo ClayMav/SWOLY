@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
+import { Button, SafeAreaView } from "react-native";
 
 import { useAuth0 } from "../auth0-hooks";
 
-const SettingsScreen = props => {
+const SettingsScreen: React.FC<any> = (props: any): JSX.Element => {
   const { logout } = useAuth0();
 
   const onLogout = () => {

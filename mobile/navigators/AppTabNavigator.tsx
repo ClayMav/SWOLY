@@ -17,7 +17,7 @@ const AppTabNavigator = createBottomTabNavigator(
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName: string = `ios-list`;
         if (routeName === "Home") {

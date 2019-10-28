@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { View, FlatList, SafeAreaView, Text } from "react-native";
 import styled, { AnyStyledComponent } from "styled-components";
 
 const ListItem: AnyStyledComponent = styled(View)`
@@ -60,7 +54,7 @@ const WorkoutDetailsScreen: (props: any) => JSX.Element = (
       <FlatList
         data={data.workoutExercises}
         renderItem={renderRow}
-        keyExtractor={item => item.exercise.name}
+        keyExtractor={(item: any): string => item.exercise.name}
       />
     </SafeAreaView>
   );

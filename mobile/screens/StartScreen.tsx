@@ -1,10 +1,8 @@
-import React, { useEffect, useGlobal } from "reactn";
+import React from "react";
 import styled from "styled-components";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-
-import * as Location from "expo-location";
 
 import {
   Text,
@@ -65,35 +63,10 @@ const GymInfo = styled(Text)`
   font-size: 14px;
 `;
 
-const DATA = [
-  {
-    description: "705 W 10th St, Rolla, MO 65409",
-    id: "sdasdgadskfnkasdf",
-    location: { latitude: 37.951124, longitude: -91.778133 },
-    name: "Missouri S&T Gym",
-    smart: 100
-  }
-];
-
-const StartScreen = props => {
+const StartScreen: React.FC<any> = (props: any): JSX.Element => {
   const { loading, error, data } = useQuery(GET_GYMS);
-  const [location, setLocation] = useGlobal("location");
 
-  useEffect(() => {
-    const getLocation = async () => {
-      Location.requestPermissionsAsync()
-        .then(async () => {
-          setLocation(await Location.getCurrentPositionAsync());
-        })
-        .catch(() => {
-          console.log("Failure to get permission");
-        });
-    };
-
-    getLocation();
-  }, []);
-
-  if (loading || location === undefined) {
+  if (loading) {
     return (
       <SafeAreaView>
         <ActivityIndicator />
@@ -136,7 +109,7 @@ const StartScreen = props => {
       <FlatList
         data={data.gyms}
         renderItem={renderRow}
-        keyExtractor={item => item.id}
+        keyExtractor={(item: any): string => item.id}
       />
     </SafeAreaView>
   );

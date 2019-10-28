@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Container, Header, Content, Text } from "native-base";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import React from "react";
+import { Container, Content, Text } from "native-base";
+import { FlatList, TouchableOpacity } from "react-native";
 import styled, { AnyStyledComponent } from "styled-components";
 
 const data = [
@@ -64,7 +64,7 @@ const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
     item,
     index
   }: any): JSX.Element => {
-    const { name, timeStart, gym, id }: any = item;
+    const { name, timeStart }: any = item;
     return (
       <ListItem onPress={() => onPress(index)}>
         <Text>{name}</Text>

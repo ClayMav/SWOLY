@@ -2,7 +2,6 @@ import React, { setGlobal } from "reactn";
 
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
-import { AppRegistry } from "react-native";
 
 import { createAppContainer } from "react-navigation";
 

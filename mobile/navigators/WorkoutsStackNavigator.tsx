@@ -1,5 +1,3 @@
-import React from "react";
-
 import { createStackNavigator } from "react-navigation-stack";
 
 import { WorkoutDetailsScreen } from "../screens/WorkoutDetailsScreen";
@@ -9,14 +7,14 @@ const WorkoutsStackNavigator = createStackNavigator({
   List: {
     screen: WorkoutsScreen,
     path: "workouts",
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       title: "Workouts"
     })
   },
   WorkoutDetails: {
     screen: WorkoutDetailsScreen,
     path: "workoutDetails",
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       title: `Workout Details`
     })
   }

@@ -3,7 +3,7 @@ import { useAuth0 } from "../auth0-hooks";
 
 import { AsyncStorage, SafeAreaView, ActivityIndicator } from "react-native";
 
-const AuthLoadingScreen = props => {
+const AuthLoadingScreen: React.FC<any> = (props: any): JSX.Element => {
   const { loading, getTokenSilently }: any = useAuth0();
 
   useEffect(() => {

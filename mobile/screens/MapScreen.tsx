@@ -1,11 +1,9 @@
-import React, { useGlobal } from "reactn";
+import React from "react";
 import {
   Text,
   View,
-  FlatList,
   Platform,
   Linking,
-  StyleSheet,
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
@@ -13,7 +11,6 @@ import { Map } from "../components/Map";
 import styled from "styled-components";
 
 import { useAuth0 } from "../auth0-hooks";
-import { encode } from "punycode";
 
 const BottomSection = styled(View)`
   background: white;
@@ -86,8 +83,7 @@ const DirectionsText = styled(Text)`
 `;
 
 const MapScreen: React.SFC<any> = (props: any): JSX.Element => {
-  const { logout, loginWithRedirect } = useAuth0();
-  const [gym, setGym] = useGlobal("gym");
+  const { loginWithRedirect } = useAuth0();
   const { data } = props.navigation.state.params;
 
   const openGps = () => {
@@ -106,7 +102,7 @@ const MapScreen: React.SFC<any> = (props: any): JSX.Element => {
   };
 
   const onLogin = async () => {
-    setGym(data);
+    //setGym(data);
     await loginWithRedirect();
     const token = await AsyncStorage.getItem("@SWOLY:token");
     if (token) {

@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import MapView, { Marker } from "react-native-maps";
 
@@ -8,7 +7,7 @@ const delta: any = {
   longitudeDelta: 0.03
 };
 
-const Map = props => {
+const Map: React.SFC<any> = (props: any): JSX.Element => {
   const {
     address,
     name,
