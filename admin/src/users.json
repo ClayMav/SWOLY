@@ -1,0 +1,111 @@
+{"users" :[
+    {
+        "dateJoined":"",
+        "name":"John Doe" 
+    },
+    {
+        "dateJoined": "",
+        "name": "Dallas Ruff"
+    },
+    {
+        "dateJoined": "",
+        "name": "Shelly Connors"
+    },
+    {
+        "dateJoined": "",
+        "name": "Gena Panos"
+    },
+    {
+        "dateJoined": "",
+        "name": "Jane Smith"
+    },
+    {
+        "dateJoined": "",
+        "name": "Alicia Mathes"
+    },
+    {
+        "dateJoined": "",
+        "name": "Antonio Wellner"
+    },
+    {
+        "dateJoined": "",
+        "name": "Roscoe Kula"
+    },
+    {
+        "dateJoined": "",
+        "name": "Jamila Armor"
+    },
+    {
+        "dateJoined": "",
+        "name": "Randal Deines"
+    },
+    {
+        "dateJoined": "",
+        "name": "Ashley Kline"
+    },
+    {
+        "dateJoined": "",
+        "name": "Mary Egner"
+    },
+    {
+        "dateJoined": "",
+        "name": "Brain McNeely"
+    },
+    {
+        "dateJoined": "",
+        "name": "Miguel Lona"
+    },
+    {
+        "dateJoined": "",
+        "name": "Rick Rives"
+    },
+    {
+        "dateJoined": "",
+        "name": "Jason Greiner"
+    },
+    {
+        "dateJoined": "",
+        "name": "Kiera Welsch"
+    },
+    {
+        "dateJoined": "",
+        "name": "Mohammed Abboud"
+    },
+    {
+        "dateJoined": "",
+        "name": "Janet Crane"
+    },
+    {
+        "dateJoined": "",
+        "name": "Steven Sabol"
+    }
+    ],
+
+    "stations": [
+        {
+            "name":"Benchpress",
+            "Exercises Allowed":["Squat", "Bench"],
+            "occupied": true
+        },
+        {
+            "name": "Lateral Pulldown",
+            "Exercises Allowed": ["Lateral Pulldown"],
+            "occupied": true
+        },
+        {
+            "name": "Leg Press",
+            "Exercises Allowed": ["Leg Press"],
+            "occupied": false
+        },
+        {
+            "name": "Treadmill",
+            "Exercises Allowed": [
+                "Sprint",
+                "Run",
+                "Walk"
+            ],
+            "occupied": true
+        }
+
+    ]
+}

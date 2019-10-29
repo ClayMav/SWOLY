@@ -2,7 +2,12 @@
 
 .App {
   text-align: center;
+  /* margin-top: 12px; */
 }
+/* 
+.header {
+  text-align: left;
+} */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

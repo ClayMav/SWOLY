@@ -1,0 +1,110 @@
+{"users":[
+    {
+        "dateJoined":"1572376564",
+        "name":"John Doe" 
+    },
+    {
+        "dateJoined": "1572372964",
+        "name": "Dallas Ruff"
+    },
+    {
+        "dateJoined": "1571771764",
+        "name": "Shelly Connors"
+    },
+    {
+        "dateJoined": "1569780964",
+        "name": "Gena Panos"
+    },
+    {
+        "dateJoined": "1571858164",
+        "name": "Jane Smith"
+    },
+    {
+        "dateJoined": "1571768164",
+        "name": "Alicia Mathes"
+    },
+    {
+        "dateJoined": "1571685364",
+        "name": "Antonio Wellner"
+    },
+    {
+        "dateJoined": "1571166964",
+        "name": "Roscoe Kula"
+    },
+    {
+        "dateJoined": "1569784564",
+        "name": "Jamila Armor"
+    },
+    {
+        "dateJoined": "1569266164",
+        "name": "Randal Deines"
+    },
+    {
+        "dateJoined": "1569176164",
+        "name": "Ashley Kline"
+    },
+    {
+        "dateJoined": "1569352564",
+        "name": "Mary Egner"
+    },
+    {
+        "dateJoined": "1569784564",
+        "name": "Brain McNeely"
+    },
+    {
+        "dateJoined": "1569874564",
+        "name": "Miguel Lona"
+    },
+    {
+        "dateJoined": "1569957364",
+        "name": "Rick Rives"
+    },
+    {
+        "dateJoined": "1569950164",
+        "name": "Jason Greiner"
+    },
+    {
+        "dateJoined": "1570040164",
+        "name": "Kiera Welsch"
+    },
+    {
+        "dateJoined": "1572027364",
+        "name": "Mohammed Abboud"
+    },
+    {
+        "dateJoined": "1569435364",
+        "name": "Janet Crane"
+    },
+    {
+        "dateJoined": "1571940964",
+        "name": "Steven Sabol"
+    }
+    ],
+
+    "stations": [
+        {
+            "name":"Benchpress",
+            "ExercisesAllowed":["Squat", "Bench"],
+            "occupied": true
+        },
+        {
+            "name": "Lateral Pulldown",
+            "ExercisesAllowed": ["Lateral Pulldown"],
+            "occupied": true
+        },
+        {
+            "name": "Leg Press",
+            "ExercisesAllowed": ["Leg Press"],
+            "occupied": false
+        },
+        {
+            "name": "Treadmill",
+            "ExercisesAllowed": [
+                "Sprint",
+                "Run",
+                "Walk"
+            ],
+            "occupied": true
+        }
+    ]
+}
