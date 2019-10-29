@@ -105,6 +105,49 @@
                 "Walk"
             ],
             "occupied": true
+        },
+        {
+            "name": "Spin Bike",
+            "ExercisesAllowed": [
+                "Cycling"
+            ],
+            "occupied": true
+        },
+        {
+            "name": "Leg Extension",
+            "ExercisesAllowed": [
+                "Leg Extensions"
+            ],
+            "occupied": false
+        },
+        {
+            "name": "Leg Curl",
+            "ExercisesAllowed": [
+                "Leg Curl"
+            ],
+            "occupied": true
+        },
+        {
+            "name": "Elliptical",
+            "ExercisesAllowed": [
+                "Run",
+                "Walk"
+            ],
+            "occupied": true
+        },
+        {
+            "name": "Rowing Machine",
+            "ExercisesAllowed": [
+                "Rowing"
+            ],
+            "occupied": false
+        },
+        {
+            "name": "Chest Press",
+            "ExercisesAllowed": [
+                "Chest Press"
+            ],
+            "occupied": true
         }
     ]
 }

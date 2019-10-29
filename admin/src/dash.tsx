@@ -20,12 +20,17 @@ function dash()
             </header>
         <body className="App">
             <div>
-                <h2 className="header">Activity</h2>
+                <br/>
+                <h2 className="header">Activity
+                <Icon type="rise" /></h2>
+                
             
             <Card size="small" >
                 <Statistic
                     title="Active Users:"
                     value={num_users}
+                    valueStyle={{ color: '#3f8600' }}
+                    prefix={<Icon type="arrow-up" />}
                 />
                 {/* <br/> */}
                 {/* <Statistic
@@ -38,14 +43,16 @@ function dash()
                     value={getCapacity(stations)}
                     precision={2}
                     suffix="%"
-                    // valueStyle={{ color: '#cf1322' }}
-                    // prefix={<Icon type="arrow-down" />}
+                    valueStyle={{ color: '#3f8600' }}
+                    prefix={<Icon type="arrow-up" />}
                 />
             </Card>
                 </div>
 
             <div>
-                <h2>Stations</h2>
+                <h2>Stations 
+                </h2>
+
             
             <List
                 grid={{ gutter: 16,
@@ -63,7 +70,11 @@ function dash()
                             <Statistic
                                 title="Status:"
                                 value={getStatus(item.occupied)[0]}
-                                // valueStyle={{ color: {getStatus(item.occupied)[1]} }}
+                                //valueStyle={getStatus(item.occupied)[1]}
+                            />
+                            <Statistic
+                                title="Exercises:"
+                                value={item.ExercisesAllowed.length}
                             />
                         </Card>
                     </List.Item>
@@ -81,19 +92,21 @@ function getStatus(occupied:boolean)
         return ["Occupied", '#3f8600'];
     }    
     else
-        return ["Open", '#cf1322'];
+        return ["Unoccupied", '#cf1322'];
 }
 
 function getCapacity(stations:any)
 {
-    let active = 0;
-    let capacity = 0;
+    var active = 0;
+    var capacity = 0;
 
     for(var i=0; i<stations.length; i++)
     {
-        if (stations[i].occupied) {
+        if (stations[i].occupied == true) 
+        {
             active++;
         }
+    }
     if(stations.length > 0)
         capacity = (active/stations.length)*100;
     
@@ -102,7 +115,6 @@ function getCapacity(stations:any)
     // else if (capacity < 80 && capacity > 30)
     //     return [capacity, '#cf1322'];
     return capacity;
-    }
 }
 
 function getAvgWorkout()
