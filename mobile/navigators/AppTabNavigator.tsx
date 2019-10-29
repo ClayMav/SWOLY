@@ -7,12 +7,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeScreen } from "../screens/HomeScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
 
-import { WorkoutsStackNavigator } from "./WorkoutsStackNavigator";
+import { WorkoutsScreen } from "../screens/WorkoutsScreen";
 
 const AppTabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
-    Workouts: WorkoutsStackNavigator,
+    Workouts: WorkoutsScreen,
     Settings: SettingsScreen
   },
   {

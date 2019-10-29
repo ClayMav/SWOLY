@@ -1,23 +1,27 @@
 import { createStackNavigator } from "react-navigation-stack";
 
 import { WorkoutDetailsScreen } from "../screens/WorkoutDetailsScreen";
-import { WorkoutsScreen } from "../screens/WorkoutsScreen";
+import { AppTabNavigator } from "./AppTabNavigator";
 
-const WorkoutsStackNavigator = createStackNavigator({
-  List: {
-    screen: WorkoutsScreen,
-    path: "workouts",
-    navigationOptions: () => ({
-      title: "Workouts"
-    })
+const WorkoutsStackNavigator = createStackNavigator(
+  {
+    App: {
+      screen: AppTabNavigator,
+      navigationOptions: {
+        header: null
+      }
+    },
+    WorkoutDetails: {
+      screen: WorkoutDetailsScreen,
+      path: "workoutDetails",
+      navigationOptions: () => ({
+        title: `Workout Details`
+      })
+    }
   },
-  WorkoutDetails: {
-    screen: WorkoutDetailsScreen,
-    path: "workoutDetails",
-    navigationOptions: () => ({
-      title: `Workout Details`
-    })
+  {
+    headerMode: "screen"
   }
-});
+);
 
 export { WorkoutsStackNavigator };

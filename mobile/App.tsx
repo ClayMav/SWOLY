@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import React, { setGlobal } from "reactn";
 
 import { ApolloProvider } from "@apollo/react-hooks";

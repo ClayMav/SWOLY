@@ -1,5 +1,7 @@
 import React from "react";
-import { View, FlatList, SafeAreaView, Text } from "react-native";
+
+import { Button, View, FlatList, SafeAreaView, Text } from "react-native";
+
 import styled, { AnyStyledComponent } from "styled-components";
 
 const ListItem: AnyStyledComponent = styled(View)`
@@ -29,30 +31,37 @@ const WorkoutDetailsScreen: (props: any) => JSX.Element = (
   const { data }: any = props.navigation.state.params;
   console.log(data);
 
+  const onPress = () => {
+    // start the workout
+  };
+
   const renderRow: ({ item }: any) => JSX.Element = ({
     item
   }: any): JSX.Element => {
     console.log(item);
-    const { exercise, reps, sets, isTimed }: any = item;
+    const { exercise, reps, sets }: any = item;
     return (
       <ListItem>
         <Text>{exercise.name}</Text>
-        <Text>{isTimed ? `${sets} seconds` : `${reps} X ${sets}`}</Text>
+        <Text>{`${reps} X ${sets}`}</Text>
       </ListItem>
     );
   };
   return (
     <SafeAreaView>
       <WorkoutInfo>
-        <WorkoutTitle>{data.name}</WorkoutTitle>
+        <WorkoutTitle>{data.workout.name}</WorkoutTitle>
         <WorkoutAdditionalInfo>{`Made by ${
-          data.creator.name
-        } on ${data.timeStart.toString()}`}</WorkoutAdditionalInfo>
-        <WorkoutDescription>{data.description + "\n"}</WorkoutDescription>
+          data.workout.createdBy.name
+        } on ${data.workout.createdTime.toString()}`}</WorkoutAdditionalInfo>
+        <WorkoutDescription>
+          {data.workout.description + "\n"}
+        </WorkoutDescription>
+        <Button title="Start Workout" onPress={onPress} />
         <Text>Exercises:</Text>
       </WorkoutInfo>
       <FlatList
-        data={data.workoutExercises}
+        data={data.workout.exercises}
         renderItem={renderRow}
         keyExtractor={(item: any): string => item.exercise.name}
       />

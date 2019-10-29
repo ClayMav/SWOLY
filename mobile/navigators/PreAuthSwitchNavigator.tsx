@@ -2,12 +2,12 @@ import { createSwitchNavigator } from "react-navigation";
 
 import { AuthLoadingScreen } from "../screens/AuthLoadingScreen";
 
-import { AppTabNavigator } from "./AppTabNavigator";
 import { GymStackNavigator } from "./GymStackNavigator";
+import { WorkoutsStackNavigator } from "./WorkoutsStackNavigator";
 
 const PreAuthSwitchNavigator = createSwitchNavigator(
   {
-    App: AppTabNavigator,
+    App: WorkoutsStackNavigator,
     Auth: GymStackNavigator,
     AuthLoading: AuthLoadingScreen
   },

@@ -27,7 +27,7 @@ const toQueryString: (x: IParams) => string = (params: IParams): string => {
 
 export const useAuth0: any = () => {
   const [isAuthenticated, setIsAuthenticated]: any = useState(false);
-  const [user, setUser]: any = useGlobal("user");
+  const [user, setUser]: any = useGlobal("authuser");
   //const [auth0Client, setAuth0]: any = useState<undefined>();
   //const [, setAuth0]: any = useState<undefined>();
   const [loading, setLoading]: any = useState(true);

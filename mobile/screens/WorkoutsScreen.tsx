@@ -1,50 +1,15 @@
-import React from "react";
-import { Container, Content, Text } from "native-base";
-import { FlatList, TouchableOpacity } from "react-native";
-import styled, { AnyStyledComponent } from "styled-components";
+import React, { useGlobal } from "reactn";
 
-const data = [
-  {
-    id: "sdfasdgadnajsdfafdasf",
-    timeStart: new Date(),
-    timeEnd: undefined,
-    currentExercise: 0,
-    gym: undefined,
-    name: "Power Legs",
-    description: "Exhaust your legs with some casual lifting and cardio",
-    target: "normies",
-    workoutExercises: [
-      {
-        exercise: {
-          name: "Back Squats"
-        },
-        reps: 5,
-        sets: 5,
-        isTimed: false
-      },
-      {
-        exercise: {
-          name: "Leg Press"
-        },
-        reps: 10,
-        sets: 3,
-        isTimed: false
-      },
-      {
-        exercise: {
-          name: "Weighted Lunges"
-        },
-        reps: 10,
-        sets: 3,
-        isTimed: false
-      }
-    ],
-    dateCreated: new Date(),
-    creator: {
-      name: "Steve"
-    }
-  }
-];
+import {
+  Text,
+  View,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
+import { Loading } from "../components/Loading";
+
+import styled, { AnyStyledComponent } from "styled-components";
 
 const ListItem: AnyStyledComponent = styled(TouchableOpacity)`
   height: 80px;
@@ -53,10 +18,26 @@ const ListItem: AnyStyledComponent = styled(TouchableOpacity)`
   justify-content: center;
 `;
 
+const Wrapper = styled(View)`
+  padding: 30px;
+`;
+
+const Name = styled(Text)`
+  margin-top: 15px;
+  font-size: 34px;
+  font-weight: bold;
+`;
+
 const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
+  const [user] = useGlobal("user");
+
+  if (!user) {
+    return <Loading />;
+  }
+
   const onPress: (x: number) => void = (index: number): void => {
     props.navigation.navigate(`WorkoutDetails`, {
-      data: data[index]
+      data: user.workouts[index]
     });
   };
 
@@ -64,7 +45,10 @@ const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
     item,
     index
   }: any): JSX.Element => {
-    const { name, timeStart }: any = item;
+    const {
+      workout: { name },
+      timeStart
+    }: any = item;
     return (
       <ListItem onPress={() => onPress(index)}>
         <Text>{name}</Text>
@@ -73,15 +57,16 @@ const WorkoutsScreen: React.SFC<any> = (props: any): JSX.Element => {
     );
   };
   return (
-    <Container>
-      <Content>
-        <FlatList
-          data={data}
-          renderItem={renderRow}
-          keyExtractor={item => item.id}
-        />
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Wrapper>
+        <Name>Workouts</Name>
+      </Wrapper>
+      <FlatList
+        data={user.workouts}
+        renderItem={renderRow}
+        keyExtractor={(item: any): string => item.id}
+      />
+    </SafeAreaView>
   );
 };
 
