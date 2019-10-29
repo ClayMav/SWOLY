@@ -1,41 +1,34 @@
 import React from 'react';
+import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
+import {useQuery} from '@apollo/react-hooks'
+import { userInfo } from 'os';
 
-export default function Occupied(this: any) {
+const GET_GYMS = gql`
+  {
+    gyms {
+      id
+      name
+      address
+      location {
+        latitude
+        longitude
+      }
+    }
+  }
+`;
+
+export default function Occupied() {
+    const { loading, error, data } = useQuery(GET_GYMS);
+    if(loading)
+        return <p>'Loading'</p>;
+    if(error)
+        return <p>'error'</p>;
+    console.log(data.gyms);
+
     function abort() {
         alert("This stations has been aborted.");
         // Redirect to unoccupied here
-    }
-    function getData() {
-        fetch('https://us-central1-swoly-252721.cloudfunctions.net/gql-test ', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                query: `{
-                    gyms {
-                        name
-                        stations {
-                          name
-                          exercisesAllowed {
-                            name
-                          }
-                          occupiedBy {
-                            name
-                          }
-                        }
-                    }
-                }`
-            })
-        })
-        .then(r => r.json())
-        .then(data => {
-            data.data.gyms.forEach((gym: any) => {
-                console.log(gym.name, ": \t", gym.stations)
-            })
-        })
-        // Return values back to the calling screen and use that there to display values
     }
     return(
         <div>
@@ -43,10 +36,6 @@ export default function Occupied(this: any) {
             <h2>This is screen is for showing the user/gym that the current station is taken</h2>
             <button 
                 onClick={abort}>Abort
-            </button>
-            <button
-                onClick={getData}
-            >Get Data
             </button>
         </div>
     )

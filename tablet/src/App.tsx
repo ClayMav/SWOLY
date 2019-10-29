@@ -1,51 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
+import Unoccupied from './components/screens/Unoccupied';
+import Occupied from './components/screens/Occupied';
+=======
+import ApolloClient from 'apollo-boost'
+import {ApolloProvider} from 'react-apollo'
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import SWOLY_Staff from './SWOLY_Staff'
 import Unoccupied from './components/screens/Unoccupied';
 import Occupied from './components/screens/Occupied';
 
-//const App: React.FC = () => {
-//  return (
-//    <div className="App">
-//      <header className="App-header">
-//        <img src={logo} className="App-logo" alt="logo" />
-//        <p>
-//          Edit <code>src/App.tsx</code> and save to reload.
-//        </p>
-//        <a
-//          className="App-link"
-//          href="https://reactjs.org"
-//          target="_blank"
-//          rel="noopener noreferrer"
-//        >
-//          Learn React
-//        </a>
-//      </header>
-//    </div>
-//  );
-//}
+const App: React.FC = () => {
+  return(routing);
+}
+>>>>>>> feature/tablet_app
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-export default function App() {
-  return (
+const routing = (
     <Router>
       <div>
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/unoccupied">Unoccupied</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
+              <Link to="/occupied">Occupied</Link>
             </li>
             <li>
               <Link to="/unoccupied">Unoccupied</Link>
@@ -59,6 +40,7 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+<<<<<<< HEAD
           <Route path="/about">
             <About />
           </Route>
@@ -70,22 +52,13 @@ export default function App() {
           <Route path="/">
             <Home />
           </Route>
+=======
+          <Route path="/unoccupied" component={ Unoccupied } />
+          <Route path="/occupied" component={ Occupied } />
+>>>>>>> feature/tablet_app
         </Switch>
       </div>
     </Router>
-  );
-}
+)
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
-//export default App;
+export default App;
