@@ -4,6 +4,9 @@ import { Redirect } from "react-router-dom";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { Layout } from "antd";
+import Button from 'antd/es/button';
+const { Header, Content, Footer } = Layout;
 
 const GET_MST_GYM = gql`
   {
@@ -32,18 +35,25 @@ export default function Unoccupied(this: any) {
 
   function occupyStation() {
     alert("The station is now occupied");
-    // Redirec to occupied, here
+    return <Redirect to="/occupied" />
   }
   return (
-    <div>
-      <h1>Hello from the unoccupied view</h1>
+    <Layout>
+      <Header>
+        <h1 style={{
+          color: 'white'
+        }}>Hello from the unoccupied view</h1>
+      </Header>
+      <Content>
       <h2>
         This is screen is for showing the user/gym that the current station is
         empty
       </h2>
-      <div>
-        <button onClick={occupyStation}>Occupy</button>
-      </div>
-    </div>
+      </Content>
+      <Footer>
+        <Button onClick={occupyStation}>Occupy</Button>
+        </Footer>
+    </Layout>
+
   );
 }

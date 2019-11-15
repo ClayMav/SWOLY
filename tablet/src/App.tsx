@@ -15,7 +15,7 @@ const App: React.FC = () => {
 const routing = (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/unoccupied">Unoccupied</Link>
@@ -24,7 +24,7 @@ const routing = (
               <Link to="/occupied">Occupied</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

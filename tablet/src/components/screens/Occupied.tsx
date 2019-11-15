@@ -2,7 +2,12 @@ import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 
+import Button from 'antd/es/button';
+
 import styled from "styled-components";
+import { Layout, Row, Col } from 'antd';
+import { Redirect } from "react-router";
+const { Header, Content, Footer } = Layout;
 
 const GET_WORKOUT = gql`
   query getUser($id: String!) {
@@ -40,24 +45,25 @@ const GET_MST_GYM = gql`
   }
 `;
 
-const Header = styled.div`
-  height: 100px;
+// const Header = styled.div`
+//   height: 100px;
+// `;
+const Heading = styled.h1`
+  font-color: white;
 `;
-const Heading = styled.h1``;
 
-const ImgHolder = styled.div`
-  width: 40%;
-`;
-const Wrap = styled.div`
-  display: flex;
-`;
-const Info = styled.div`
-  font-size: 20px;
-  flex: 1;
-`;
-const Img = styled.img`
-  width: 100%;
-`;
+// const ImgHolder = styled.div`
+//   width: 100%;
+//   justify-content: center
+// `;
+// const Wrap = styled.div`
+//   display: flex;
+// `;
+// const Info = styled.div`
+//   font-size: 20px;
+//   flex: 1;
+//   alignText: center;
+// `;
 
 export default function Occupied() {
   const { loading: gloading, data: gdata } = useQuery(GET_MST_GYM);
@@ -66,40 +72,78 @@ export default function Occupied() {
     variables: { id: gdata ? gdata.gym.stations[0].occupiedBy.id : null }
   });
   if (gloading || loading) return <p>'Loading'</p>;
-  if (error) return <p>'error'</p>;
+  if (error) return <Redirect to="/unoccupied" />;
   const workout = data.user.workouts[0];
   console.log(workout);
 
   function abort() {
     alert("This stations has been aborted.");
-    // Redirect to unoccupied here
-  }
+    return <Redirect to="/unoccupied" />;  
+}
   function complete() {
     alert("Your exercise is now complete");
+    return <Redirect to="/unoccupied" />;
   }
   return (
     <div>
-      <Header>
-        <Heading>Hey, {workout.workout.createdBy.name}!</Heading>
-        <h2>Your workout today is: {workout.workout.name}</h2>
-      </Header>
-      <Wrap>
-        <ImgHolder>
-          <Img src={workout.workout.exercises[0].exercise.instructions} />
-        </ImgHolder>
-        <Info>
-          <h3>
-            Current exercise: {workout.workout.exercises[0].exercise.name}
-          </h3>
-          <ul>
-            <li>Sets: {workout.workout.exercises[0].reps}</li>
-            <li>Reps: {workout.workout.exercises[0].sets}</li>
-            <li>Weight: {workout.workout.exercises[0].weight}lbs</li>
-          </ul>
-          <button onClick={abort}>Abort</button>
-          <button onClick={complete}>Done</button>
-        </Info>
-      </Wrap>
+      <Layout className="layout">
+        <Header>
+            <Heading style={{
+              color: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              Hey, {workout.workout.createdBy.name}!
+            </Heading>
+        </Header>
+        <Content>
+          <Col
+          
+          >
+            <Row
+              type='flex'
+              justify='center'
+            >
+              <h2>Your workout today is: {workout.workout.name}</h2>
+            </Row>
+            <Row
+              type='flex'
+              justify='center'
+            >
+              <img
+              src={workout.workout.exercises[0].exercise.instructions} 
+              width='50%'
+              />
+            </Row>
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'
+            >
+              <Col>
+                <h3>
+                  Current exercise: {workout.workout.exercises[0].exercise.name}
+                </h3>
+                <ul>
+                  <li>Sets: {workout.workout.exercises[0].reps}</li>
+                  <li>Reps: {workout.workout.exercises[0].sets}</li>
+                  <li>Weight: {workout.workout.exercises[0].weight}lbs</li>
+                </ul>
+              </Col>
+            </Row>
+            </Col>
+        </Content>
+        <Footer
+          style={{
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Button type="primary" onClick={abort}>Abort</Button>
+          <Button type="primary" onClick={complete}>Done</Button>
+        </Footer>
+      </Layout>
     </div>
   );
 }
