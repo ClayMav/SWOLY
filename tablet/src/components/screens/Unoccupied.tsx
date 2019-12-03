@@ -15,6 +15,7 @@ const GET_MST_GYM = gql`
         occupiedBy {
           id
         }
+        reserved
       }
     }
   }
@@ -29,30 +30,26 @@ export default function Unoccupied(this: any) {
     console.log(data);
   }
 
-  if (data && data.gym.stations[0].occupiedBy) {
+  // console.log(data.gym.stations[0])
+
+  if (data && data.gym.stations[1].reserved === true) {
     return <Redirect to="/occupied" />;
   }
 
   function occupyStation() {
-    alert("The station is now occupied");
     return <Redirect to="/occupied" />
   }
   return (
     <Layout>
-      <Header>
-        <h1 style={{
-          color: 'white'
-        }}>Hello from the unoccupied view</h1>
-      </Header>
       <Content>
-      <h2>
-        This is screen is for showing the user/gym that the current station is
-        empty
-      </h2>
+        <img 
+        src = 'https://bit.ly/2rPCE7I'
+        width = '100%'
+        />
       </Content>
-      <Footer>
+      {/* <Footer>
         <Button onClick={occupyStation}>Occupy</Button>
-        </Footer>
+      </Footer> */}
     </Layout>
 
   );

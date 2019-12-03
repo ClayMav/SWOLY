@@ -1,13 +1,14 @@
-import React from "react";
+import React, {  useState } from "react";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import Button from 'antd/es/button';
 
 import styled from "styled-components";
 import { Layout, Row, Col } from 'antd';
-import { Redirect } from "react-router";
+import { withRouter, Redirect } from "react-router";
 const { Header, Content, Footer } = Layout;
+
 
 const GET_WORKOUT = gql`
   query getUser($id: String!) {
@@ -40,11 +41,24 @@ const GET_MST_GYM = gql`
         occupiedBy {
           id
         }
+        name
+        reserved
       }
     }
   }
 `;
 
+const UPDATE_BENCH = gql`
+  mutation {
+    demoTablet(done: false)
+  }
+`;
+
+const UPDATE_SQUAT = gql`
+  mutation {
+    demoTablet(done: true)
+  }
+`;
 // const Header = styled.div`
 //   height: 100px;
 // `;
@@ -52,38 +66,40 @@ const Heading = styled.h1`
   font-color: white;
 `;
 
-// const ImgHolder = styled.div`
-//   width: 100%;
-//   justify-content: center
-// `;
-// const Wrap = styled.div`
-//   display: flex;
-// `;
-// const Info = styled.div`
-//   font-size: 20px;
-//   flex: 1;
-//   alignText: center;
-// `;
-
 export default function Occupied() {
   const { loading: gloading, data: gdata } = useQuery(GET_MST_GYM);
   const { loading, error, data } = useQuery(GET_WORKOUT, {
     skip: gloading,
-    variables: { id: gdata ? gdata.gym.stations[0].occupiedBy.id : null }
+    variables: { id: gdata ? gdata.gym.stations[1].occupiedBy.id : null }
   });
   if (gloading || loading) return <p>'Loading'</p>;
-  if (error) return <Redirect to="/unoccupied" />;
+  console.log(gdata.gym.stations)
+  if (gdata && gdata.gym.stations[1].reserved === false) { 
+    return <Redirect to="/unoccupied" />; 
+  }
   const workout = data.user.workouts[0];
   console.log(workout);
 
   function abort() {
-    alert("This stations has been aborted.");
-    return <Redirect to="/unoccupied" />;  
-}
-  function complete() {
-    alert("Your exercise is now complete");
-    return <Redirect to="/unoccupied" />;
+    window.location.reload()
   }
+
+  async function complete() {
+    fetch('https://us-central1-swoly-252721.cloudfunctions.net/gql-test', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `mutation {
+              demoTablet(done: true)
+            }`
+        })
+    })
+    window.location.reload(true);
+  }
+
   return (
     <div>
       <Layout className="layout">
@@ -93,13 +109,17 @@ export default function Occupied() {
               display: 'flex',
               justifyContent: 'center',
             }}>
-              Hey, {workout.workout.createdBy.name}!
+              Station: {gdata.gym.stations[1].name}
             </Heading>
         </Header>
         <Content>
-          <Col
-          
-          >
+          <Col>
+            <Row
+              type='flex'
+              justify='center'
+            >
+              <h1>Hey, {workout.workout.createdBy.name}!</h1>
+            </Row>
             <Row
               type='flex'
               justify='center'
