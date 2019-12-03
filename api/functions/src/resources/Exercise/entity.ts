@@ -34,4 +34,6 @@ export class Exercise {
 
   @Field({ nullable: true })
   public isWarmup?: boolean;
+
+  public table: string = "test-exercises2";
 }
